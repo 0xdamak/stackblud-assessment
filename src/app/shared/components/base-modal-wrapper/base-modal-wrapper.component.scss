@@ -1,0 +1,39 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.2);
+  .content {
+    position: relative;
+    background-color: var(--bg-white);
+    max-height: 80vh;
+    min-height: 16rem;
+    max-width: 30rem;
+    min-width: 16rem;
+    width: 100%;
+    overflow-y: auto;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem;
+    @media all and (max-width: 480px) {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  }
+  svg {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+body.modal_open {
+  overflow: hidden;
+}
