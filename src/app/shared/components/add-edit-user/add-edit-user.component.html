@@ -1,0 +1,36 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <h1 *ngIf="user">Update User</h1>
+  <h1 *ngIf="!user">Create User</h1>
+  <fieldset>
+    <label for="">Full Name</label>
+    <input type="text" formControlName="fullName" />
+    <span
+      *ngIf="
+        !userForm.get('fullName')!.valid && userForm.get('fullName')!.touched
+      "
+    >
+      Please enter a full name</span
+    >
+  </fieldset>
+  <fieldset>
+    <label for="">Email</label>
+    <input type="email" formControlName="email" />
+    <span
+      *ngIf="!userForm.get('email')!.valid && userForm.get('email')!.touched"
+    >
+      Please enter a valid email</span
+    >
+  </fieldset>
+  <fieldset>
+    <label for="">Role</label>
+    <input type="text" formControlName="role" />
+    <span *ngIf="!userForm.get('role')!.valid && userForm.get('role')!.touched">
+      Please enter a role</span
+    >
+  </fieldset>
+  <button type="submit" [disabled]="!userForm.valid">
+    <span *ngIf="user"> Update </span>
+    <span *ngIf="!user"> Create </span>
+  </button>
+  <span *ngIf="error$ | async"> An error occurred </span>
+</form>
