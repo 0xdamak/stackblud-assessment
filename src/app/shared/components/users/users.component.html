@@ -1,0 +1,92 @@
+<div class="container">
+  <ng-container *ngIf="users">
+    <div class="actions">
+      <input
+        class=""
+        type="text"
+        placeholder="Search name or email"
+        [(ngModel)]="query"
+      />
+      <button (click)="setModalDisplay('create')">Create User</button>
+    </div>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let user of users
+                | paginate : { itemsPerPage: 8, currentPage: page }
+                | inputSearch : query
+            "
+          >
+            <td>
+              {{ user.id }}
+            </td>
+            <td>
+              {{ user.name }}
+            </td>
+            <td style="text-transform: lowercase">
+              {{ user.email }}
+            </td>
+            <td>
+              {{ user.username }}
+            </td>
+            <td>
+              <ul class="actions">
+                <li (click)="editUser(user)" class="edit">Edit</li>
+                <li (click)="deleteUser(user)" class="delete">Delete</li>
+              </ul>
+            </td>
+          </tr>
+          <tr *ngIf="users.length === 0">
+            <td>Not found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls
+      style="display: block; margin-top: 2rem"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </ng-container>
+
+  <ng-container *ngIf="error | async">
+    <div class="error">
+      <span>😟</span>
+      <h1>Oops, an error occurred while fetching users</h1>
+    </div>
+  </ng-container>
+</div>
+
+<app-base-modal-wrapper
+  *ngIf="modalDisplay !== '' && modalDisplay !== 'delete'"
+  id="add-edit-user"
+  (close)="closeModal()"
+  [@modalState]
+>
+  <app-add-edit-user
+    [user]="selectedUser"
+    (close)="closeModal()"
+  ></app-add-edit-user>
+</app-base-modal-wrapper>
+
+<app-base-modal-wrapper
+  *ngIf="modalDisplay !== '' && modalDisplay === 'delete'"
+  id="delete-user"
+  (close)="closeModal()"
+  [@modalState]
+>
+  <app-delete-user
+    [user]="selectedUser!"
+    (cancel)="closeModal()"
+  ></app-delete-user>
+</app-base-modal-wrapper>
