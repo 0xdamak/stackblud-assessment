@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/reset";
+
+:root {
+  --accent-color: #4687ff;
+  --bg-white: #ffffff;
+  --bg-gray: #f3f3f3;
+  --text-white: #ffffff;
+  --text-warning: #cc5400;
+  --text-danger: #dd3248;
+  --border-danger: #dd3248;
+  --border-gray: #1b1b1b33;
+  --button-invalid: #888888;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
