@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Are you sure you want to delete user?</h1>
+  <div class="buttons">
+    <button (click)="onCancel()">Cancel</button>
+    <button (click)="deleteUser()">Confirm</button>
+  </div>
+  <span *ngIf="error$ | async"> An error occurred </span>
+</div>
